@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Erriez I2C Voltage/Current/Power sensor library for Arduino: Erriez INA219 I2C Voltage/Current/Power Monitor library for Arduino</title>
+<title>Erriez I2C Voltage/Current/Power sensor library for Arduino: Erriez INA219 I2C/SMB Voltage/Current/Power Monitor library for Arduino</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -62,17 +62,24 @@ $(function() {
 
 <div class="header">
   <div class="headertitle">
-<div class="title">Erriez <a class="el" href="class_i_n_a219.html" title="INA219 class. ">INA219</a> I2C Voltage/Current/Power Monitor library for Arduino </div>  </div>
+<div class="title">Erriez <a class="el" href="class_i_n_a219.html" title="INA219 class. ">INA219</a> I2C/SMB Voltage/Current/Power Monitor library for Arduino </div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p><a href="https://travis-ci.org/Erriez/ErriezINA219"></a></p>
-<p>This is an <a class="el" href="class_i_n_a219.html" title="INA219 class. ">INA219</a> I2C Voltage/Current/Power Monitor library for Arduino.</p>
+<p>This is an <a class="el" href="class_i_n_a219.html" title="INA219 class. ">INA219</a> I2C/SMB Voltage/Current/Power Monitor library for Arduino.</p>
 <div class="image">
 <img src="https://raw.githubusercontent.com/Erriez/ErriezINA219/master/extras/INA219.png" alt="INA219"/>
 </div>
 <h2>Library features</h2>
 <ul>
-<li>TODO</li>
+<li>High Accuracy: max 0.5%</li>
+<li>Measure Voltage 0..26V DC</li>
+<li>Measure Current 0..2000mA DC (with default 0.1 Ohm shunt)</li>
+<li>Measure Power in Watt (Software Voltage * Current calculation)</li>
+<li>Configurable shunt resistor value</li>
+<li>Configurable I2C address for multiple sensors</li>
+<li>Power-down / power-up control</li>
+<li>Low-level register access</li>
 </ul>
 <h2>Hardware</h2>
 <p>Any Arduino hardware with a TWI interface and <code>Wire.h</code> support.</p>
@@ -95,6 +102,13 @@ $(function() {
 <h2>Examples</h2>
 <ul>
 <li><a href="https://github.com/Erriez/ErriezINA219/blob/master/examples/ErriezINA219/ErriezINA219.ino">ErriezINA219</a> Getting started.</li>
+<li><a href="https://github.com/Erriez/ErriezINA219/blob/master/examples/ErriezINA219SerialPlotter/ErriezINA219SerialPlotter.ino">ErriezINA219SerialPlotter</a> Serial Plotter Example.</li>
+</ul>
+<h2>Documentation</h2>
+<ul>
+<li><a href="https://erriez.github.io/ErriezINA219">Doxygen online HTML</a></li>
+<li><a href="https://github.com/Erriez/ErriezINA219/raw/master/ErriezINA219.pdf">Doxygen PDF</a></li>
+<li><a href="https://github.com/Erriez/ErriezINA219/blob/master/extras/INA219.pdf">INA219 datasheet</a></li>
 </ul>
 <h2>Library dependencies</h2>
 <ul>
