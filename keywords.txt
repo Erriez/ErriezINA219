@@ -1,0 +1,39 @@
+#######################################
+# INA219 library for Arduino
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+INA219	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+begin	KEYWORD2
+powerDown	KEYWORD2
+powerUp	KEYWORD2
+read	KEYWORD2
+
+registerWrite	KEYWORD2
+registerRead	KEYWORD2
+
+dumpRegisters	KEYWORD2
+
+busVoltage	KEYWORD2
+shuntVoltage	KEYWORD2
+current	KEYWORD2
+power	KEYWORD2
+overflow	KEYWORD2
+available	KEYWORD2
+
+#######################################
+# Instances (KEYWORD2)
+#######################################
+ina219	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+INA219_I2C_ADDRESS	LITERAL1
+INA219_SHUNT_RESISTOR	LITERAL1
