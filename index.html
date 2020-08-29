@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.13"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Erriez I2C Voltage/Current/Power sensor library for Arduino: Erriez INA219 I2C/SMB Voltage/Current/Power Monitor library for Arduino</title>
+<title>Erriez I2C/SMB Voltage/Current/Power sensor library for Arduino: Erriez INA219 I2C/SMB Voltage/Current/Power Monitor library for Arduino</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -22,10 +22,10 @@
  <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="INA219.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Erriez I2C Voltage/Current/Power sensor library for Arduino
+   <div id="projectname">Erriez I2C/SMB Voltage/Current/Power sensor library for Arduino
    &#160;<span id="projectnumber">1.0.0</span>
    </div>
-   <div id="projectbrief">This is an I2C Voltage/Current/Power sensor library for Arduino</div>
+   <div id="projectbrief">This is an I2C/SMB Voltage/Current/Power sensor library for Arduino</div>
   </td>
  </tr>
  </tbody>
@@ -101,8 +101,9 @@ $(function() {
 </table>
 <h2>Examples</h2>
 <ul>
-<li><a href="https://github.com/Erriez/ErriezINA219/blob/master/examples/ErriezINA219/ErriezINA219.ino">ErriezINA219</a> Getting started.</li>
-<li><a href="https://github.com/Erriez/ErriezINA219/blob/master/examples/ErriezINA219SerialPlotter/ErriezINA219SerialPlotter.ino">ErriezINA219SerialPlotter</a> Serial Plotter Example.</li>
+<li><a href="https://github.com/Erriez/ErriezINA219/blob/master/examples/ErriezINA219AutoRange/ErriezINA219AutoRange.ino">ErriezINA219AutoRange</a> Auto range example.</li>
+<li><a href="https://github.com/Erriez/ErriezINA219/blob/master/examples/ErriezINA219GettingStarted/ErriezINA219GettingStarted.ino">ErriezINA219GettingStarted</a> Getting started example.</li>
+<li><a href="https://github.com/Erriez/ErriezINA219/blob/master/examples/ErriezINA219SerialPlotter/ErriezINA219SerialPlotter.ino">ErriezINA219SerialPlotter</a> Serial Plotter example.</li>
 </ul>
 <h2>Documentation</h2>
 <ul>
@@ -114,7 +115,8 @@ $(function() {
 <ul>
 <li><code>Wire.h</code></li>
 </ul>
-<h2>Library installation</h2>
+<h2>Getting started</h2>
+<div class="fragment"><div class="line">{c++}</div><div class="line">#include &lt;Arduino.h&gt;</div><div class="line">#include &lt;Wire.h&gt;</div><div class="line"></div><div class="line">#include &lt;ErriezINA219.h&gt;</div><div class="line"></div><div class="line">// Default I2C Address 0x40</div><div class="line">#define INA219_I2C_ADDRESS      0x40</div><div class="line"></div><div class="line">// 0.1 Ohm shunt resistor</div><div class="line">#define INA219_SHUNT_RESISTOR   0.1</div><div class="line"></div><div class="line">// Create INA219 sensor object</div><div class="line">INA219 ina219 = INA219(INA219_I2C_ADDRESS, INA219_SHUNT_RESISTOR);</div><div class="line"></div><div class="line"></div><div class="line">void setup()</div><div class="line">{</div><div class="line">    // Initialize serial port</div><div class="line">    Serial.begin(115200);</div><div class="line">    while (!Serial) {</div><div class="line">        ;</div><div class="line">    }</div><div class="line">    Serial.println(F(&quot;\nErriez INA219 voltage, current and power sensor example\n&quot;));</div><div class="line"></div><div class="line">    // Initialize I2C</div><div class="line">    Wire.begin();</div><div class="line">    Wire.setClock(400000);</div><div class="line"></div><div class="line">    // Initialize INA219</div><div class="line">    while (!ina219.begin()) {</div><div class="line">        Serial.println(F(&quot;Error: INA219 not detected&quot;));</div><div class="line">        delay(3000);</div><div class="line">    }</div><div class="line">}</div><div class="line"></div><div class="line">void loop()</div><div class="line">{</div><div class="line">    // Read from sensor</div><div class="line">    if (!ina219.read()) {</div><div class="line">        Serial.println(F(&quot;Error: INA219 read failed&quot;));</div><div class="line">        return;</div><div class="line">    }</div><div class="line"></div><div class="line">    // Check valid conversion</div><div class="line">    if (!ina219.available) {</div><div class="line">        Serial.println(F(&quot;Error: INA219 not available&quot;));</div><div class="line">        return;</div><div class="line">    }</div><div class="line"></div><div class="line">    // Print result</div><div class="line">    Serial.println(F(&quot;INA219:&quot;));</div><div class="line"></div><div class="line">    Serial.print(F(&quot;  Bus voltage:   &quot;));</div><div class="line">    Serial.print(ina219.busVoltage, 2);</div><div class="line">    Serial.println(F(&quot; V&quot;));</div><div class="line"></div><div class="line">    Serial.print(F(&quot;  Shunt voltage: &quot;));</div><div class="line">    Serial.print(ina219.shuntVoltage / 1000, 1);</div><div class="line">    Serial.println(F(&quot; V&quot;));</div><div class="line"></div><div class="line">    Serial.print(F(&quot;  Current:       &quot;));</div><div class="line">    Serial.print(ina219.current / 1000, 1);</div><div class="line">    Serial.println(F(&quot; A&quot;));</div><div class="line"></div><div class="line">    Serial.print(F(&quot;  Power:         &quot;));</div><div class="line">    Serial.print(ina219.power / 1000, 1);</div><div class="line">    Serial.println(F(&quot; W&quot;));</div><div class="line"></div><div class="line">    // Wait some time</div><div class="line">    delay(1000);</div><div class="line">}</div></div><!-- fragment --><h2>Library installation</h2>
 <p>Please refer to the <a href="https://github.com/Erriez/ErriezArduinoLibrariesAndSketches/wiki">Wiki</a> page.</p>
 <h2>Other Arduino Libraries and Sketches from Erriez</h2>
 <ul>
