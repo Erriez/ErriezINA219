@@ -23,10 +23,8 @@
  */
 
 /*!
- * \brief Erriez INA219 sensor serial plotter example for Arduino
+ * \brief Erriez INA219 sensor getting started example for Arduino
  * \details
- *      Open Arduino IDE | Tools | Serial Plotter and reset the board
- *
  *      Source:         https://github.com/Erriez/ErriezINA219
  *      Documentation:  https://erriez.github.io/ErriezINA219
  */
@@ -53,8 +51,7 @@ void setup()
     while (!Serial) {
         ;
     }
-    // Print labels for plotter
-    Serial.println(F("\nVoltage, Current"));
+    Serial.println(F("\nErriez INA219 voltage, current and power sensor example\n"));
 
     // Initialize I2C
     Wire.begin();
@@ -62,6 +59,7 @@ void setup()
 
     // Initialize INA219
     while (!ina219.begin()) {
+        Serial.println(F("Error: INA219 not detected"));
         delay(3000);
     }
 }
@@ -70,19 +68,35 @@ void loop()
 {
     // Read from sensor
     if (!ina219.read()) {
+        Serial.println(F("Error: INA219 read failed"));
         return;
     }
 
     // Check valid conversion
     if (!ina219.available) {
+        Serial.println(F("Error: INA219 not available"));
         return;
     }
 
     // Print result
-    Serial.print(ina219.busVoltage, 2);
-    Serial.print(F("\t"));
-    Serial.println(ina219.current / 1000, 1);
+    Serial.println(F("INA219:"));
 
-    // Wait
-    delay(100);
+    Serial.print(F("  Bus voltage:   "));
+    Serial.print(ina219.busVoltage, 2);
+    Serial.println(F(" V"));
+
+    Serial.print(F("  Shunt voltage: "));
+    Serial.print(ina219.shuntVoltage / 1000, 1);
+    Serial.println(F(" V"));
+
+    Serial.print(F("  Current:       "));
+    Serial.print(ina219.current / 1000, 1);
+    Serial.println(F(" A"));
+
+    Serial.print(F("  Power:         "));
+    Serial.print(ina219.power / 1000, 1);
+    Serial.println(F(" W"));
+
+    // Wait some time
+    delay(1000);
 }

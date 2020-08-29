@@ -19,7 +19,8 @@ function autobuild()
     BOARDS_ESP="--board d1_mini --board nodemcuv2 --board lolin_d32"
 
     echo "Building examples..."
-    platformio ci --lib="." ${BOARDS_AVR} ${BOARDS_ARM} ${BOARDS_ESP} examples/ErriezINA219/ErriezINA219.ino
+    platformio ci --lib="." ${BOARDS_AVR} ${BOARDS_ARM} ${BOARDS_ESP} examples/ErriezINA219AutoRange/ErriezINA219AutoRange.ino
+    platformio ci --lib="." ${BOARDS_AVR} ${BOARDS_ARM} ${BOARDS_ESP} examples/ErriezINA219GettingStarted/ErriezINA219GettingStarted.ino
     platformio ci --lib="." ${BOARDS_AVR} ${BOARDS_ARM} ${BOARDS_ESP} examples/ErriezINA219SerialPlotter/ErriezINA219SerialPlotter.ino
 }
 

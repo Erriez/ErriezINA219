@@ -35,8 +35,9 @@ Any Arduino hardware with a TWI interface and ```Wire.h``` support.
 
 ## Examples
 
-* [ErriezINA219](https://github.com/Erriez/ErriezINA219/blob/master/examples/ErriezINA219/ErriezINA219.ino) Getting started.
-* [ErriezINA219SerialPlotter](https://github.com/Erriez/ErriezINA219/blob/master/examples/ErriezINA219SerialPlotter/ErriezINA219SerialPlotter.ino) Serial Plotter Example.
+* [ErriezINA219AutoRange](https://github.com/Erriez/ErriezINA219/blob/master/examples/ErriezINA219AutoRange/ErriezINA219AutoRange.ino) Auto range example.
+* [ErriezINA219GettingStarted](https://github.com/Erriez/ErriezINA219/blob/master/examples/ErriezINA219GettingStarted/ErriezINA219GettingStarted.ino) Getting started example.
+* [ErriezINA219SerialPlotter](https://github.com/Erriez/ErriezINA219/blob/master/examples/ErriezINA219SerialPlotter/ErriezINA219SerialPlotter.ino) Serial Plotter example.
 
 
 ## Documentation
@@ -50,6 +51,82 @@ Any Arduino hardware with a TWI interface and ```Wire.h``` support.
 
 * ```Wire.h```
 
+
+## Getting started
+
+```c++
+#include <Arduino.h>
+#include <Wire.h>
+
+#include <ErriezINA219.h>
+
+// Default I2C Address 0x40
+#define INA219_I2C_ADDRESS      0x40
+
+// 0.1 Ohm shunt resistor
+#define INA219_SHUNT_RESISTOR   0.1
+
+// Create INA219 sensor object
+INA219 ina219 = INA219(INA219_I2C_ADDRESS, INA219_SHUNT_RESISTOR);
+
+
+void setup()
+{
+    // Initialize serial port
+    Serial.begin(115200);
+    while (!Serial) {
+        ;
+    }
+    Serial.println(F("\nErriez INA219 voltage, current and power sensor example\n"));
+
+    // Initialize I2C
+    Wire.begin();
+    Wire.setClock(400000);
+
+    // Initialize INA219
+    while (!ina219.begin()) {
+        Serial.println(F("Error: INA219 not detected"));
+        delay(3000);
+    }
+}
+
+void loop()
+{
+    // Read from sensor
+    if (!ina219.read()) {
+        Serial.println(F("Error: INA219 read failed"));
+        return;
+    }
+
+    // Check valid conversion
+    if (!ina219.available) {
+        Serial.println(F("Error: INA219 not available"));
+        return;
+    }
+
+    // Print result
+    Serial.println(F("INA219:"));
+
+    Serial.print(F("  Bus voltage:   "));
+    Serial.print(ina219.busVoltage, 2);
+    Serial.println(F(" V"));
+
+    Serial.print(F("  Shunt voltage: "));
+    Serial.print(ina219.shuntVoltage / 1000, 1);
+    Serial.println(F(" V"));
+
+    Serial.print(F("  Current:       "));
+    Serial.print(ina219.current / 1000, 1);
+    Serial.println(F(" A"));
+
+    Serial.print(F("  Power:         "));
+    Serial.print(ina219.power / 1000, 1);
+    Serial.println(F(" W"));
+
+    // Wait some time
+    delay(1000);
+}
+```
 
 ## Library installation
 

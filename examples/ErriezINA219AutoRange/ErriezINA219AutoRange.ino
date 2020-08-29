@@ -23,7 +23,7 @@
  */
 
 /*!
- * \brief Erriez INA219 I2C voltage, current and power sensor example for Arduino
+ * \brief Erriez INA219 sensor auto-range example for Arduino
  * \details
  *      Source:         https://github.com/Erriez/ErriezINA219
  *      Documentation:  https://erriez.github.io/ErriezINA219
@@ -51,7 +51,7 @@ void setup()
     while (!Serial) {
         ;
     }
-    Serial.println(F("\nINA219 voltage, current and power sensor example\n"));
+    Serial.println(F("\nErriez INA219 voltage, current and power sensor example\n"));
 
     // Initialize I2C
     Wire.begin();
@@ -69,16 +69,19 @@ void setup()
 
 void loop()
 {
+    // Read from sensor
     if (!ina219.read()) {
         Serial.println(F("Error: INA219 read failed"));
         return;
     }
 
+    // Check valid conversion
     if (!ina219.available) {
         Serial.println(F("Error: INA219 not available"));
         return;
     }
 
+    // Print results in auto-range format
     Serial.println(F("INA219:"));
 
     Serial.print(F("  Bus voltage:   "));
@@ -112,5 +115,6 @@ void loop()
         Serial.println(F(" mW"));
     }
 
+    // Wait some time
     delay(1000);
 }
