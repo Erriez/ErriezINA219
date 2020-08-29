@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/Erriez/ErriezINA219.svg?branch=master)](https://travis-ci.org/Erriez/ErriezINA219)
 
-This is an INA219 I2C/SMB Voltage/Current/Power Monitor library for Arduino.
+This is an INA219 I2C/SMB DC Voltage/Current/Power sensor library for Arduino.
 
 ![INA219](https://raw.githubusercontent.com/Erriez/ErriezINA219/master/extras/INA219.png)
 
