@@ -1,0 +1,25 @@
+{
+    "name": "ErriezINA219",
+    "version": "1.0.0",
+    "keywords": "arduino, library, ina219, dc, voltage, current, power, sensor, i2c, smbus, serial, plotter, uno, atmega328, esp8266, esp32, due, hardware, documentation, examples, erriez",
+    "description": "This is an INA219 I2C/SMB DC Voltage/Current/Power sensor library for Arduino.",
+    "homepage": "https://github.com/Erriez/ErriezArduinoLibrariesAndSketches",
+    "license": "MIT",
+    "authors": {
+        "name": "Erriez",
+        "url": "https://github.com/Erriez",
+        "maintainer": true
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Erriez/ErriezINA219.git",
+        "branch": "master"
+    },
+    "frameworks": "arduino",
+    "platforms": [
+        "atmelavr",
+        "atmelsam",
+        "espressif8266",
+        "espressif32"
+    ]
+}
